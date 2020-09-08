@@ -2,19 +2,25 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
     <loc>https://parrot88.github.io/timestampApp/en/download.html</loc>
-    <lastmod>2007-09-07</lastmod>
+    <lastmod>2020-09-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
 </url>
 <url>
     <loc>https://parrot88.github.io/timestampApp/jp/download.html</loc>
-    <lastmod>2007-01-01</lastmod>
+    <lastmod>2020-09-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
 </url>
 <url>
     <loc>https://parrot88.github.io/timestampApp/jp/sleep_record.html</loc>
-    <lastmod>2007-01-01</lastmod>
+    <lastmod>2020-09-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+</url>
+<url>
+    <loc>https://parrot88.github.io/timestampApp/en/sleep_record.html</loc>
+    <lastmod>2020-09-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
 </url>
