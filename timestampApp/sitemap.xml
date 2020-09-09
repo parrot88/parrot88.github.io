@@ -24,5 +24,17 @@
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
 </url>
+<url>
+    <loc>https://parrot88.github.io/timestampApp/jp/sick_record.html</loc>
+    <lastmod>2020-09-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+</url>
+<url>
+    <loc>https://parrot88.github.io/timestampApp/en/sick_record.html</loc>
+    <lastmod>2020-09-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+</url>
 
 </urlset>
