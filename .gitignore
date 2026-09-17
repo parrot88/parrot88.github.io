@@ -1,0 +1,11 @@
+# Claude 作業用ファイル(リポジトリには含めない)
+issue.md
+progress.md
+handoff*.md
+CLAUDE.md
+.claude/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
