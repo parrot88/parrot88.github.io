@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>CSV export format and how to read it | Timestamp &amp; Memo</title>
+  <meta name="description" content="The CSV format exported by Timestamp &amp; Memo (one line = date-time and note, no header, yyyy/MM/dd HH:mm), and what to keep in mind when reading it with AI or Excel. Includes a text to paste along with the CSV when asking an AI.">
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <link rel="canonical" href="https://parrot88.github.io/timestampApp/en/csv_format.html">
+  <link rel="alternate" hreflang="ja" href="https://parrot88.github.io/timestampApp/jp/csv_format.html">
+  <link rel="alternate" hreflang="en" href="https://parrot88.github.io/timestampApp/en/csv_format.html">
+  <link rel="alternate" hreflang="x-default" href="https://parrot88.github.io/timestampApp/en/csv_format.html">
+  <!-- Bootstrap 3.3.5 -->
+  <link rel="stylesheet" href="../../AdminLTE/bootstrap/css/bootstrap.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+  <!-- AdminLTE 2.3.2 -->
+  <link rel="stylesheet" href="../../AdminLTE/dist/css/AdminLTE.min.css">
+  <link rel="stylesheet" href="../../AdminLTE/dist/css/skins/_all-skins.min.css">
+  <!-- timestampApp shared style -->
+  <link rel="stylesheet" href="../assets/site.css">
+  <style>
+    .ts-card-body p, .ts-card-body li { font-size: 14px; line-height: 1.8; }
+    .csv-sample, .csv-prompt {
+      font-family: Menlo, Consolas, "Courier New", monospace;
+      font-size: 13px; line-height: 1.7;
+      background: #f6f8fa; border: 1px solid var(--ts-border); border-radius: 6px;
+      padding: 10px 12px; margin: 0 0 12px;
+      white-space: pre-wrap; word-break: break-all; color: #24292e;
+    }
+    .csv-table { width: 100%; border-collapse: collapse; margin: 0 0 12px; font-size: 13px; line-height: 1.6; }
+    .csv-table th, .csv-table td { border: 1px solid var(--ts-border); padding: 7px 8px; vertical-align: top; text-align: left; }
+    .csv-table thead th { background: var(--ts-callout-bg); }
+    .csv-table tbody th { background: #fafbfc; min-width: 4.5em; }
+    .csv-table code, .ts-card-body li code, .ts-card-body p code { color: #c7254e; background: #f9f2f4; padding: 1px 4px; border-radius: 3px; font-size: 12px; word-break: break-all; }
+    .csv-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .csv-cannot {
+      background: #fff8e6; border-left: 4px solid var(--ts-accent);
+      border-radius: 0 6px 6px 0; padding: 10px 14px; margin: 0 0 14px;
+    }
+    .csv-cannot li { margin-bottom: 6px; }
+    .csv-pending { color: var(--ts-muted); }
+    .csv-meta { font-size: 12px; color: var(--ts-muted); margin-top: 18px; }
+  </style>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y47ZC8XLF2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-Y47ZC8XLF2');
+  </script>
+</head>
+<body class="hold-transition skin-black-light ts-body">
+  <div class="ts-container">
+    <ol class="ts-breadcrumb">
+      <li><a href="./download.html"><i class="fa fa-home"></i> Timestamp &amp; Memo</a></li>
+      <li class="active">CSV export format</li>
+    </ol>
+    <div class="ts-card"><div class="ts-card-body">
+      <h1 class="ts-card-title">CSV export format and how to read it</h1>
+      <p>This page is for people who want to read the records exported with the app's CSV export in Excel, a spreadsheet, or an AI (ChatGPT, Gemini, Claude and others). It also has a text to paste along with the CSV when you ask an AI.</p>
+      <p class="ts-note">* The format on this page was checked on the Android version. The iPhone format is still being checked.</p>
+
+      <h2 class="ts-section-title">One line = one record</h2>
+<pre class="csv-sample">2026/02/05 07:33,"Breakfast"
+2026/02/05 08:12,"Jogging start"
+2026/02/05 08:40,"Jogging end"
+2026/02/05 12:05,""
+2026/02/05 21:30,"Medicine 2 tablets \"as needed\""</pre>
+      <ul>
+        <li>Each line is one record: the date and time it was saved on the left, the note on the right.</li>
+        <li>There is no header row. Data starts on the first line.</li>
+        <li>A record with an empty note looks like line 4: <code>""</code>.</li>
+        <li>A <code>"</code> inside a note is written as <code>\"</code>, as on line 5.</li>
+      </ul>
+
+      <h2 class="ts-section-title">Format at a glance</h2>
+      <div class="csv-scroll">
+      <table class="csv-table">
+        <thead><tr><th>Item</th><th>Details</th></tr></thead>
+        <tbody>
+          <tr><th>Columns</th><td>Two: (1) date and time, (2) note. There are no ID, seconds, category, location or duration columns</td></tr>
+          <tr><th>Header row</th><td>None</td></tr>
+          <tr><th>Date and time</th><td><code>yyyy/MM/dd HH:mm</code> (e.g. <code>2026/02/05 07:33</code>). 24-hour clock; month, day, hour and minute always have two digits. No seconds</td></tr>
+          <tr><th>Time zone</th><td>The device's local time when the record was saved. No time zone is written. Records made abroad stay in the local time of that place</td></tr>
+          <tr><th>Quoting</th><td>Notes are always wrapped in <code>"</code>. Inside a note, <code>"</code> becomes <code>\"</code> and <code>\</code> becomes <code>\\</code> (not the <code>""</code> style common in Excel). Commas inside a note are not separators because they are inside the quotes</td></tr>
+          <tr><th>Line breaks</th><td>One record per line, LF line endings. If a note contains a line break, that record spans several lines</td></tr>
+          <tr><th>Order</th><td>Oldest first</td></tr>
+          <tr><th>Range</th><td>The one month you select. Up to 10,000 records per month (as noted in the app)</td></tr>
+          <tr><th>Deleted records</th><td>Not included</td></tr>
+          <tr><th>Edited records</th><td>Only the current date, time and note. The original time and edit history are not included</td></tr>
+          <tr><th>Records added later</th><td>Records added with a past date and time look the same as records saved on the spot. You cannot tell them apart</td></tr>
+          <tr><th>Character encoding</th><td>Not set by the app, because the data is shared as text, not as a file. It is decided by the app that saves it</td></tr>
+        </tbody>
+      </table>
+      </div>
+
+      <h2 class="ts-section-title">iPhone vs Android</h2>
+      <div class="csv-scroll">
+      <table class="csv-table">
+        <thead><tr><th></th><th>iPhone</th><th>Android</th></tr></thead>
+        <tbody>
+          <tr><th>Steps</th><td>On the CSV export screen, choose the month and tap the export button</td><td>"Setting" tab &rarr; "Output CSV format" &rarr; choose the month &rarr; "Output data"</td></tr>
+          <tr><th>What is shared</th><td>A text document (a file) named "TimeStampCSVData"</td><td>Text, not a file. It is passed to the receiving app as characters</td></tr>
+          <tr><th>Line format</th><td class="csv-pending">Being checked</td><td><code>yyyy/MM/dd HH:mm,"note"</code></td></tr>
+        </tbody>
+      </table>
+      </div>
+
+      <h2 class="ts-section-title">What the data can and cannot tell you</h2>
+      <p><b>What it can tell you</b></p>
+      <ul>
+        <li>At what time you left which note</li>
+        <li>How many records a day, common words in notes, patterns by weekday or time of day</li>
+        <li>Intervals between the same kind of note, such as "medicine" or "woke up" (how many hours since the last one)</li>
+      </ul>
+      <p><b>What it cannot tell you (do not guess these)</b></p>
+      <div class="csv-cannot">
+      <ul>
+        <li><b>Duration</b>: there is no end time in this CSV. The time until the next record is not necessarily how long that activity lasted. You can only calculate it when the notes come in pairs, such as "start" and "end".</li>
+        <li><b>What happened when nothing was recorded</b>: a gap with no records means "nothing was recorded", not "nothing happened".</li>
+        <li><b>Whether the button was pressed at that time</b>: records added or edited later look the same.</li>
+        <li><b>What numbers in notes mean</b>: notes are free text. Units and meanings of numbers such as "2 tablets" or "38.2" can only be read from the note itself.</li>
+        <li><b>Medical judgment</b>: medication and symptom records are personal notes, not a basis for diagnosis. Ask a doctor about your health.</li>
+      </ul>
+      </div>
+
+      <h2 class="ts-section-title">Text to paste along with the CSV when asking an AI</h2>
+      <p>When you give the CSV to ChatGPT, Gemini, Claude or another AI, paste this text too so the AI knows the format. It is for CSV exported from the Android version.</p>
+<pre class="csv-prompt" id="csv-prompt">This is one month of records exported from the Android version of "Timestamp &amp; Memo" (簡単に時間とメモ記録アプリ).
+- One line per record, formatted as: yyyy/MM/dd HH:mm,"note" . There is no header row.
+- Left: the time the record was saved (device local time, no seconds). Right: the note (may be empty).
+- A double quote inside a note is written as \" .
+- There is no end time or duration column. Do not treat the gap to the next record as the duration of an activity.
+- A gap with no records means "nothing was recorded", not "nothing happened".
+Format reference: https://parrot88.github.io/timestampApp/en/csv_format.html</pre>
+      <button type="button" class="ts-btn ts-btn-primary" id="csv-copy"><i class="fa fa-clipboard"></i><span id="csv-copy-label">Copy the text</span></button>
+
+      <h2 class="ts-section-title">Opening in Excel or a spreadsheet</h2>
+      <ul>
+        <li>There is no header, so adding "Date time" and "Note" as the first line makes it easier to work with.</li>
+        <li><code>\"</code> inside a note is not Excel's standard style, so notes that contain <code>"</code> may look broken.</li>
+        <li>If characters look garbled, open the file again with the encoding set to UTF-8.</li>
+      </ul>
+
+      <h2 class="ts-section-title">Related page</h2>
+      <ul>
+        <li><a href="./download.html">About Timestamp &amp; Memo</a></li>
+      </ul>
+      <p class="csv-meta">Last checked: 2026-11-10 (Android version)</p>
+    </div></div>
+  </div>
+
+  <footer class="ts-footer">
+    Copyright &copy; since 2020 timestamp application All rights reserved.
+  </footer>
+  <script>
+    (function () {
+      var btn = document.getElementById('csv-copy');
+      var label = document.getElementById('csv-copy-label');
+      var text = document.getElementById('csv-prompt').textContent;
+      function done(ok) {
+        label.textContent = ok ? 'Copied' : 'Could not copy. Press and hold the text to select it';
+        setTimeout(function () { label.textContent = 'Copy the text'; }, 2500);
+        if (ok && typeof gtag === 'function') {
+          gtag('event', 'copyAiPrompt', {'event_category': 'csv_format', 'event_label': 'csv_format_en', 'value': 1});
+        }
+      }
+      function fallback() {
+        var ta = document.createElement('textarea');
+        ta.value = text; ta.setAttribute('readonly', ''); ta.style.position = 'fixed'; ta.style.top = '-1000px';
+        document.body.appendChild(ta); ta.select();
+        var ok = false;
+        try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+        document.body.removeChild(ta); done(ok);
+      }
+      btn.addEventListener('click', function () {
+        if (navigator.clipboard && window.isSecureContext) {
+          navigator.clipboard.writeText(text).then(function () { done(true); }, fallback);
+        } else { fallback(); }
+      });
+    })();
+  </script>
+</body>
+</html>
