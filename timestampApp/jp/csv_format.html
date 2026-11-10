@@ -34,11 +34,6 @@
     .csv-table tbody th { background: #fafbfc; min-width: 4.5em; }
     .csv-table code, .ts-card-body li code, .ts-card-body p code { color: #c7254e; background: #f9f2f4; padding: 1px 4px; border-radius: 3px; font-size: 12px; word-break: break-all; }
     .csv-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-    .csv-cannot {
-      background: #fff8e6; border-left: 4px solid var(--ts-accent);
-      border-radius: 0 6px 6px 0; padding: 10px 14px; margin: 0 0 14px;
-    }
-    .csv-cannot li { margin-bottom: 6px; }
     .csv-pending { color: var(--ts-muted); }
     .csv-meta { font-size: 12px; color: var(--ts-muted); margin-top: 18px; }
   </style>
@@ -109,23 +104,12 @@
       </table>
       </div>
 
-      <h2 class="ts-section-title">データから分かること・分からないこと</h2>
-      <p><b>分かること</b></p>
+      <h2 class="ts-section-title">データから分かること</h2>
       <ul>
         <li>何時何分に、何のメモを残したか</li>
         <li>1 日の記録の回数、よく出てくるメモの言葉、曜日や時間帯の偏り</li>
         <li>「薬」「起床」など同じメモの間隔(前回から何時間あいたか)</li>
       </ul>
-      <p><b>分からないこと(推定しないでください)</b></p>
-      <div class="csv-cannot">
-      <ul>
-        <li><b>所要時間</b>:この CSV に終了時刻はありません。次の記録までの時間は、その行のことが続いていた時間とは限りません。「開始」「終了」のように対になるメモを書いている場合だけ、その対で計算できます。</li>
-        <li><b>記録のない時間に何をしていたか</b>:記録がない時間は「記録していない」だけで、何もしていなかったとは限りません。</li>
-        <li><b>その時刻にボタンを押したかどうか</b>:あとから登録・編集した記録も同じ形で出ます。</li>
-        <li><b>メモの数字の意味</b>:メモは自由に書いた文です。「2錠」「38.2」などの数字の単位や意味は、メモから読み取るしかありません。</li>
-        <li><b>医学的な判断</b>:服薬や体調の記録は本人のメモで、診断の根拠になるものではありません。体調の判断は医師に相談してください。</li>
-      </ul>
-      </div>
 
       <h2 class="ts-section-title">AI に相談するときに一緒に貼る説明文</h2>
       <p>CSV を ChatGPT・Gemini・Claude などに渡すとき、この文も一緒に貼ると、AI に形式を正しく伝えられます。Android 版で書き出した CSV 用です。</p>
@@ -133,8 +117,7 @@
 ・1 行が 1 回の記録。形式は「yyyy/MM/dd HH:mm,"メモ"」。ヘッダ行はありません。
 ・左が記録した日時(端末の時刻、秒なし)、右がそのときのメモ(空のこともあります)。
 ・メモの中の " は \" と書かれています。
-・終了時刻や所要時間の列はありません。次の記録までの間隔を、その行の作業時間とみなさないでください。
-・記録のない時間は「記録していない」だけで、何もしていなかったとは限りません。
+・終了時刻や所要時間の列はありません。
 形式の説明: https://parrot88.github.io/timestampApp/jp/csv_format.html</pre>
       <button type="button" class="ts-btn ts-btn-primary" id="csv-copy"><i class="fa fa-clipboard"></i><span id="csv-copy-label">説明文をコピー</span></button>
 

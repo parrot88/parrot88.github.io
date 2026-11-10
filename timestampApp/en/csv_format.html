@@ -34,11 +34,6 @@
     .csv-table tbody th { background: #fafbfc; min-width: 4.5em; }
     .csv-table code, .ts-card-body li code, .ts-card-body p code { color: #c7254e; background: #f9f2f4; padding: 1px 4px; border-radius: 3px; font-size: 12px; word-break: break-all; }
     .csv-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-    .csv-cannot {
-      background: #fff8e6; border-left: 4px solid var(--ts-accent);
-      border-radius: 0 6px 6px 0; padding: 10px 14px; margin: 0 0 14px;
-    }
-    .csv-cannot li { margin-bottom: 6px; }
     .csv-pending { color: var(--ts-muted); }
     .csv-meta { font-size: 12px; color: var(--ts-muted); margin-top: 18px; }
   </style>
@@ -109,23 +104,12 @@
       </table>
       </div>
 
-      <h2 class="ts-section-title">What the data can and cannot tell you</h2>
-      <p><b>What it can tell you</b></p>
+      <h2 class="ts-section-title">What the data can tell you</h2>
       <ul>
         <li>At what time you left which note</li>
         <li>How many records a day, common words in notes, patterns by weekday or time of day</li>
         <li>Intervals between the same kind of note, such as "medicine" or "woke up" (how many hours since the last one)</li>
       </ul>
-      <p><b>What it cannot tell you (do not guess these)</b></p>
-      <div class="csv-cannot">
-      <ul>
-        <li><b>Duration</b>: there is no end time in this CSV. The time until the next record is not necessarily how long that activity lasted. You can only calculate it when the notes come in pairs, such as "start" and "end".</li>
-        <li><b>What happened when nothing was recorded</b>: a gap with no records means "nothing was recorded", not "nothing happened".</li>
-        <li><b>Whether the button was pressed at that time</b>: records added or edited later look the same.</li>
-        <li><b>What numbers in notes mean</b>: notes are free text. Units and meanings of numbers such as "2 tablets" or "38.2" can only be read from the note itself.</li>
-        <li><b>Medical judgment</b>: medication and symptom records are personal notes, not a basis for diagnosis. Ask a doctor about your health.</li>
-      </ul>
-      </div>
 
       <h2 class="ts-section-title">Text to paste along with the CSV when asking an AI</h2>
       <p>When you give the CSV to ChatGPT, Gemini, Claude or another AI, paste this text too so the AI knows the format. It is for CSV exported from the Android version.</p>
@@ -133,8 +117,7 @@
 - One line per record, formatted as: yyyy/MM/dd HH:mm,"note" . There is no header row.
 - Left: the time the record was saved (device local time, no seconds). Right: the note (may be empty).
 - A double quote inside a note is written as \" .
-- There is no end time or duration column. Do not treat the gap to the next record as the duration of an activity.
-- A gap with no records means "nothing was recorded", not "nothing happened".
+- There is no end time or duration column.
 Format reference: https://parrot88.github.io/timestampApp/en/csv_format.html</pre>
       <button type="button" class="ts-btn ts-btn-primary" id="csv-copy"><i class="fa fa-clipboard"></i><span id="csv-copy-label">Copy the text</span></button>
 
