@@ -49,3 +49,6 @@ footer{max-width:720px;margin:auto;padding:22px 20px 110px;font-size:12px;color:
   .bar{display:none}
   footer{padding-bottom:40px}
 }
+
+/* 英語版: 両端揃えで単語間が空きすぎないように */
+html[lang="en"] p{text-align:left}
