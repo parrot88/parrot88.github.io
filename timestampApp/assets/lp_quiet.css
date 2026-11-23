@@ -1,0 +1,51 @@
+/* 案 B 静かな読み物 — 落ち着き・やさしい・信頼
+   見出し=明朝 / 本文=ゴシック。表紙の色だけでページを見分ける(病気=薄い苔色、睡眠=夜の紺鼠) */
+:root{--bg:#fbfaf6;--ink:#262b2c;--sub:#5f6a6a;--line:#d9dbd3;--top:#e5ebe2;--top-ink:#262b2c;--accent:#4d7a6c;--bar:rgba(251,250,246,.96)}
+.sleep_record{--top:#1c2a2f;--top-ink:#ece6d6;--accent:#b99856}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:16.5px/2 "Hiragino Sans","Hiragino Kaku Gothic ProN","Noto Sans CJK JP","Noto Sans JP","Yu Gothic UI",Meiryo,sans-serif;overflow-wrap:anywhere}
+img{max-width:100%;height:auto;display:block}
+.stores{display:flex;gap:12px;max-width:380px}
+.stores a{flex:1;min-width:0}
+.stores img{width:100%;border-radius:4.6%/15%}
+h1,h2,h3{font-family:"Hiragino Mincho ProN","Yu Mincho","Noto Serif CJK JP","Noto Serif JP",serif;font-feature-settings:"palt"}
+
+.top{background:var(--top);color:var(--top-ink)}
+.in{max-width:720px;margin:auto;padding:0 20px}
+.top .in{padding-top:52px;padding-bottom:44px;position:relative}
+.moon{width:34px;height:34px;color:var(--accent);display:block;margin-bottom:22px}
+.line{display:block;width:40px;height:1px;background:var(--accent);margin:16px 0 28px}
+h1{font-size:25px;line-height:1.6;font-weight:600;letter-spacing:.05em;margin:0 0 32px;text-wrap:pretty}
+.hero{border-radius:3px;margin:0 0 28px;box-shadow:0 0 0 1px rgba(0,0,0,.06)}
+
+.article{max-width:36em;margin:auto;padding:56px 20px 40px}
+h2{font-size:19px;line-height:1.75;font-weight:500;color:var(--sub);margin:0 0 30px;padding-left:16px;border-left:2px solid var(--accent)}
+h3{font-size:20px;line-height:1.6;font-weight:700;margin:56px 0 14px}
+h3::before{content:"";display:block;width:28px;height:1px;background:var(--accent);margin-bottom:18px}
+p{margin:0 0 1.3em;text-align:justify}
+ul{list-style:none;margin:.2em 0 1.5em;padding:14px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+li{position:relative;padding-left:1.8em;line-height:1.9}
+li::before{content:"";position:absolute;left:.2em;top:1em;width:.9em;height:1px;background:var(--accent)}
+
+.end{background:var(--top);color:var(--top-ink)}
+.end .in{padding-top:48px;padding-bottom:48px}
+.end img{border-radius:3px;margin-bottom:28px}
+footer{max-width:720px;margin:auto;padding:22px 20px 110px;font-size:12px;color:var(--sub)}
+
+/* スマホ: 表紙のボタンが見えなくなったら下に出る帯。末尾が見えたら引っ込む */
+.bar{position:fixed;left:0;right:0;bottom:0;background:var(--bar);border-top:1px solid var(--line);padding:10px 16px calc(10px + env(safe-area-inset-bottom));transform:translateY(110%);transition:transform .25s}
+.bar.on{transform:none}
+.bar .stores{margin:auto;max-width:330px}
+
+@media (min-width:760px){
+  .top .in{padding-top:80px;padding-bottom:64px}
+  h1{font-size:36px;margin-bottom:44px}
+  .hero{max-width:min(100%,600px)}
+  .article{padding-top:80px;font-size:17px}
+  h2{font-size:22px}
+  h3{font-size:22px}
+  .end img{max-width:min(100%,600px)}
+  .bar{display:none}
+  footer{padding-bottom:40px}
+}
